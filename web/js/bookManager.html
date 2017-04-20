@@ -1,0 +1,38 @@
+<div ng-controller="bookController" ng-init="getBooks()">
+    <table>
+        <tr>
+            <th class="manageHead">ID</th>
+            <th class="manageHead">name</th>
+            <th class="manageHead">price</th>
+            <th>
+                <button ng-click="createBtn()">创建</button>
+                <button ng-click="getBooks()">刷新</button>
+            </th>
+        </tr>
+        <tr ng-repeat="book in books">
+            <td class="manageShort">{{book.id}}</td>
+            <td class="manageLong">{{book.name}}</td>
+            <td class="manageShort">{{book.price | currency}}</td>
+            <td>
+                <button ng-click="editBtn(book.id, book.name, book.price)">编辑</button>
+                <button ng-click="deleteBtn(book.id)">删除</button>
+            </td>
+        </tr>
+        <tr ng-hide = "!(edit||create)">
+            <td class="manageShort">
+                <input ng-model="bookID" ng-disabled="true" class="manageInput"/>
+            </td>
+            <td class="manageLong">
+                <input ng-model="bookName" class="manageInput"/>
+            </td>
+            <td class="manageShort">
+                <input ng-model="price" class="manageInput"/>
+            </td>
+            <td>
+                <button ng-click="submitBtn()">提交</button>
+                <button ng-click="cancelBtn()">取消</button>
+            </td>
+        </tr>
+    </table>
+    <p>{{responseMsg}}</p>
+</div>

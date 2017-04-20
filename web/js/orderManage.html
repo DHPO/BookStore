@@ -1,0 +1,33 @@
+<div ng-controller="orderController" ng-init="getOrders()">
+    <table>
+        <tr>
+            <th class="manageShort manageHead">orderid</th>
+            <th class="manageShort manageHead">userid</th>
+            <th>
+                <button ng-click="createBtn()">创建</button>
+                <button ng-click="getOrders()">刷新</button>
+            </th>
+        </tr>
+        <tr ng-repeat="order in orders">
+            <td class="manageShort">{{order.orderid}}</td>
+            <td class="manageShort">{{order.userid}}</td>
+            <td>
+                <button ng-click="editBtn(order.orderid, order.bookid, order.userid, order.amount)">编辑</button>
+                <button ng-click="deleteBtn(order.orderid)">删除</button>
+            </td>
+        </tr>
+        <tr ng-hide = "!(edit||create)">
+            <td class="manageShort">
+                <input ng-model="orderid" ng-disabled="true" class="manageInput"></input>
+            </td>
+            <td class="manageShort">
+                <input ng-model="userid" class="manageInput"></input>
+            </td>
+            <td>
+                <button ng-click="submitBtn()">提交</button>
+                <button ng-click="cancelBtn()">取消</button>
+            </td>
+        </tr>
+    </table>
+    <p>{{responseMsg}}</p>
+</div>

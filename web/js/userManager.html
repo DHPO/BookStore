@@ -1,0 +1,38 @@
+<div ng-controller="userController" ng-init="getUsers()">
+    <table>
+        <tr>
+            <th class="manageHead manageShort">ID</th>
+            <th class="manageHead manageShort">name</th>
+            <th class="manageHead manageShort">email</th>
+            <th>
+                <button ng-click="createBtn()">创建</button>
+                <button ng-click="getUsers()">刷新</button>
+            </th>
+        </tr>
+        <tr ng-repeat="user in users">
+            <td class="manageShort">{{user.id}}</td>
+            <td class="manageShort">{{user.name}}</td>
+            <td class="manageMiddle">{{user.email}}</td>
+            <td>
+                <button ng-click="editBtn(user.id, user.name, user.email)">编辑</button>
+                <button ng-click="deleteBtn(user.id)">删除</button>
+            </td>
+        </tr>
+        <tr ng-hide = "!(edit||create)">
+            <td class="manageShort">
+                <input ng-model="id" ng-disabled="true" class="manageInput" required/>
+            </td>
+            <td class="manageShort">
+                <input ng-model="name" class="manageInput"/>
+            </td>
+            <td class="manageMiddle">
+                <input ng-model="email" class="manageInput manageMiddle"/>
+            </td>
+            <td>
+                <button ng-click="submitBtn()">提交</button>
+                <button ng-click="cancelBtn()">取消</button>
+            </td>
+        </tr>
+    </table>
+    <p>{{responseMsg}}</p>
+</div>

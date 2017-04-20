@@ -1,0 +1,25 @@
+#head-container{width:auto; background-color: #AAA; padding:10px 10px;}
+#head-container *{text-align:center;}
+h1{font-size: 40px;}
+
+#body-container>div{width:auto; height:auto; margin:auto;}
+
+table, th, td{border:0px solid #AAA;border-collapse:collapse;}
+tr:nth-child(odd){background-color: #CCCCCC;}
+/*input{max-width: 150px;}*/
+
+/* view */
+.bookWapper{border: 1px solid #AAA; border-radius: 10px; width:200px; height:300px; padding:15px; margin:10px; float:left;}
+.bookWapper:hover{box-shadow: 0px 0px 5px #888888; transition: 0.2s;}
+.bookid{color: #BBB;}
+.shopCar{position:relative; right:0px; bottom: 5px; font-size:14px; margin:5px;}
+.bookName{font-size:18px; margin:5px; height:40px; overflow:auto;}
+.bookPrice{font-size:14px; color:red; margin:2px; float:left}
+.bookImage{width:180px; height:220px; border: 1px dotted black; border-radius: 5px;}
+
+/* manager */
+.manageHead{text-align:center !important;}
+.manageShort{width:100px; text-align: center; overflow:auto;}
+.manageMiddle{width:200px; text-align: center; overflow:auto;}
+.manageLong{width:300px; overflow:auto; text-align: center;}
+.manageInput{background-color: #EEEEEE; box-shadow:none; width:95%; text-align: center;}

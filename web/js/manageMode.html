@@ -1,0 +1,10 @@
+<div ng-controller="mainController">
+    <button ng-click="modeToBook()">book</button>
+    <button ng-click="modeToUser()">user</button>
+    <button ng-click="modeToOrder()">orders</button>
+    <button ng-click="modeToOrderItem()">orderItem</button>
+    <div ng-show="manageMode == 0"><book-manage></book-manage></div>
+    <div ng-show="manageMode == 1"><user-manage></user-manage></div>
+    <div ng-show="manageMode == 2"><order-manage></order-manage></div>
+    <div ng-show="manageMode == 3"><order-item-manage></order-item-manage></div>
+</div>

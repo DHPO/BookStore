@@ -1,0 +1,38 @@
+<div ng-controller="orderItemController" ng-init="getOrderItem()">
+    <table>
+        <tr>
+            <th class="manageShort manageHead">orderid</th>
+            <th class="manageShort manageHead">bookid</th>
+            <th class="manageShort manageHead">amount</th>
+            <th>
+                <button ng-click="createBtn()">创建</button>
+                <button ng-click="getOrderItem()">刷新</button>
+            </th>
+        </tr>
+        <tr ng-repeat="orderItem in orderItems">
+            <td class="manageShort">{{orderItem.orderid}}</td>
+            <td class="manageShort">{{orderItem.bookid}}</td>
+            <td class="manageShort">{{orderItem.amount}}</td>
+            <td>
+                <button ng-click="editBtn(orderItem.orderid, orderItem.bookid, orderItem.amount)">编辑</button>
+                <button ng-click="deleteBtn(orderItem.orderid, orderItem.bookid)">删除</button>
+            </td>
+        </tr>
+        <tr ng-hide = "!(edit||create)">
+            <td class="manageShort">
+                <input ng-model="orderid" ng-disabled="edit" class="manageInput"></input>
+            </td>
+            <td class="manageShort">
+                <input ng-model="bookid" ng-disabled="edit" class="manageInput"></input>
+            </td>
+            <td class="manageShort">
+                <input ng-model="amount" class="manageInput"></input>
+            </td>
+            <td>
+                <button ng-click="submitBtn()">提交</button>
+                <button ng-click="cancelBtn()">取消</button>
+            </td>
+        </tr>
+    </table>
+    <p>{{responseMsg}}</p>
+</div>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="jquery-3.1.1.min.js"></script>
+        <script src="/js/angular.min.js"></script>
+        <script src="/js/main.js"></script>
+        <script src="/js/bookController.js"></script>
+        <script src="/js/orderController.js"></script>
+        <script src="/js/orderItemController.js"></script>
+        <script src="/js/userController.js"></script>
+        <script src="/js/directive.js"></script>
+        <link href="/css/main.css" rel="stylesheet" type="text/css"/>
+        <title>Book Store</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body ng-app="main" ng-controller="mainController">
+        <div id="head-container">
+            <h1>Book Store</h1>
+            <p>Welcome To Book Store</p>
+            <div id="switch"><button ng-click="switchBookstore()">浏览</button><button ng-click="switchManage()">管理</button></div>
+        </div>
+        <div id="body-container">
+            <div id="view" ng-hide="mode"><view-mode></view-mode></div>
+            <div id="manage" ng-hide="!mode"><manage-mode></manage-mode><div>
+        </div>
+    </body>
+</html>
