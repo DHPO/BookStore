@@ -15,6 +15,7 @@ app.controller("orderController",function($scope, $http){
                 $scope.getOrders();
                 $scope.create = false;
                 $scope.edit = false;
+                $scope.success = true;
             }
             else{$scope.responseMsg = "failed";}
         });

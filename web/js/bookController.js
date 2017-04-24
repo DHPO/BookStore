@@ -16,7 +16,9 @@ app.controller("bookController",function($scope, $http){
                 $scope.create = false;
                 $scope.edit = false;
             }
-            else{$scope.responseMsg = "failed";}
+            else{
+                $scope.responseMsg = "failed";
+            }
         });
     }
     $scope.getBooks = function(){

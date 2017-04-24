@@ -1,12 +1,12 @@
 <div ng-controller="orderItemController" ng-init="getOrderItem()">
-    <table>
+    <table class="table table-striped table-hover table-bordered table-condensed">
         <tr>
             <th class="manageShort manageHead">orderid</th>
             <th class="manageShort manageHead">bookid</th>
             <th class="manageShort manageHead">amount</th>
-            <th>
-                <button ng-click="createBtn()">创建</button>
-                <button ng-click="getOrderItem()">刷新</button>
+            <th style="width:100px; text-align:center;">
+                <button ng-click="createBtn()" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-plus"></span>&nbsp;创建</button>
+                <button ng-click="getOrderItem()" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-repeat"></span>&nbsp;刷新</button>
             </th>
         </tr>
         <tr ng-repeat="orderItem in orderItems">
@@ -14,25 +14,25 @@
             <td class="manageShort">{{orderItem.bookid}}</td>
             <td class="manageShort">{{orderItem.amount}}</td>
             <td>
-                <button ng-click="editBtn(orderItem.orderid, orderItem.bookid, orderItem.amount)">编辑</button>
-                <button ng-click="deleteBtn(orderItem.orderid, orderItem.bookid)">删除</button>
+                <button ng-click="editBtn(orderItem.orderid, orderItem.bookid, orderItem.amount)" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</button>
+                <button ng-click="deleteBtn(orderItem.orderid, orderItem.bookid)" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</button>
             </td>
         </tr>
         <tr ng-hide = "!(edit||create)">
             <td class="manageShort">
-                <input ng-model="orderid" ng-disabled="edit" class="manageInput"></input>
+                <input ng-model="orderid" ng-disabled="edit" class="form-control manageInput"></input>
             </td>
             <td class="manageShort">
-                <input ng-model="bookid" ng-disabled="edit" class="manageInput"></input>
+                <input ng-model="bookid" ng-disabled="edit" class="form-control manageInput"></input>
             </td>
             <td class="manageShort">
-                <input ng-model="amount" class="manageInput"></input>
+                <input ng-model="amount" class="form-control manageInput"></input>
             </td>
             <td>
-                <button ng-click="submitBtn()">提交</button>
-                <button ng-click="cancelBtn()">取消</button>
+                <button ng-click="submitBtn()" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-ok"></span>&nbsp;提交</button>
+                <button ng-click="cancelBtn()" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-remove"></span>&nbsp;取消</button>
             </td>
         </tr>
     </table>
-    <p>{{responseMsg}}</p>
+    <p ng-class="{'alert-success':(responseMsg=='succeed'), 'alert-danger':(responseMsg=='failed')}" class="alert">{{responseMsg}}</p>
 </div>
