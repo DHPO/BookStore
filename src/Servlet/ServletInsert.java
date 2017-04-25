@@ -48,6 +48,7 @@ public class ServletInsert extends HttpServlet {
                     out.println(0);
             }
         }catch (SQLException e){
+            out.print(0);
             e.printStackTrace();
         }
         out.close();

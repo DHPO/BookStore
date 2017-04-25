@@ -18,7 +18,7 @@
                 <button ng-click="deleteBtn(orderItem.orderid, orderItem.bookid)" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</button>
             </td>
         </tr>
-        <tr ng-hide = "!(edit||create)">
+        <tr ng-hide = "!(edit||create)" ng-class="{'danger':fail}">
             <td class="manageShort">
                 <input ng-model="orderid" ng-disabled="edit" class="form-control manageInput"></input>
             </td>

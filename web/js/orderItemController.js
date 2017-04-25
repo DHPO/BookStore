@@ -1,4 +1,4 @@
-app.controller("orderItemController",function($scope, $http){
+app.controller("orderItemController",function($scope, $http, $timeout){
     var json2kv = function(dict){
         var ret = [];
         for(var key in dict){
@@ -6,6 +6,10 @@ app.controller("orderItemController",function($scope, $http){
         }
         console.log(ret);
         return ret.join("&");
+    };
+
+    var responseMsgReset = function () {
+        $scope.responseMsg = "";
     };
 
     var post = function(url, postBody){
@@ -16,7 +20,8 @@ app.controller("orderItemController",function($scope, $http){
                 $scope.create = false;
                 $scope.edit = false;
             }
-            else{$scope.responseMsg = "failed";}
+            else{$scope.responseMsg = "failed";$scope.fail = true;}
+            $timeout(responseMsgReset,2000);
         });
     }
     $scope.getOrderItem = function(){
@@ -37,6 +42,7 @@ app.controller("orderItemController",function($scope, $http){
     $scope.cancelBtn = function(){
         $scope.edit = false;
         $scope.create = false;
+        $scope.fail = false;
     }
     $scope.createBtn = function(){
         $scope.create = true;

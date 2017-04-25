@@ -39,6 +39,7 @@ public class ServletDelete extends HttpServlet {
             int result = DatabaseAccess.delete(ds, table, id, id2);
             out.println(result);
         } catch (SQLException e) {
+            out.print(0);
             e.printStackTrace();
         } finally {
             out.close();

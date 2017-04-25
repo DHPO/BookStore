@@ -8,25 +8,33 @@ public class DatabaseAccess {
     public static String getUser(DataSource ds) throws SQLException, JSONException{
         Connection conn = ds.getConnection();
         PreparedStatement statement = conn.prepareStatement("select * from user");
-        return ResultSetToJSON.convert(statement.executeQuery());
+        String temp = ResultSetToJSON.convert(statement.executeQuery());
+        conn.close();
+        return temp;
     }
 
     public static String getOrder(DataSource ds) throws SQLException, JSONException{
         Connection conn = ds.getConnection();
         PreparedStatement statement = conn.prepareStatement("select * from orders");
-        return ResultSetToJSON.convert(statement.executeQuery());
+        String temp =  ResultSetToJSON.convert(statement.executeQuery());
+        conn.close();
+        return temp;
     }
 
     public static String getOrderItem(DataSource ds) throws SQLException, JSONException{
         Connection conn = ds.getConnection();
         PreparedStatement statement = conn.prepareStatement("select * from orderItem");
-        return ResultSetToJSON.convert(statement.executeQuery());
+        String temp = ResultSetToJSON.convert(statement.executeQuery());
+        conn.close();
+        return temp;
     }
 
     public static String getBook(DataSource ds) throws SQLException, JSONException{
         Connection conn = ds.getConnection();
         PreparedStatement statement = conn.prepareStatement("select * from book");
-        return ResultSetToJSON.convert(statement.executeQuery());
+        String temp = ResultSetToJSON.convert(statement.executeQuery());
+        conn.close();
+        return temp;
     }
 
     public static int updateUser(DataSource ds, int id, String name, String email) throws SQLException, JSONException {
@@ -35,6 +43,7 @@ public class DatabaseAccess {
         statement.setString(1, name);
         statement.setString(2, email);
         statement.setInt(3, id);
+        conn.close();
         return statement.executeUpdate();
     }
 
@@ -44,6 +53,7 @@ public class DatabaseAccess {
         statement.setString(1, name);
         statement.setDouble(2, price);
         statement.setInt(3, id);
+        conn.close();
         return statement.executeUpdate();
     }
 
@@ -52,6 +62,7 @@ public class DatabaseAccess {
         PreparedStatement statement = conn.prepareStatement("update orders set userid = ? where orderid = ?");
         statement.setInt(1, userid);
         statement.setInt(2, orderid);
+        conn.close();
         return statement.executeUpdate();
     }
 
@@ -61,6 +72,7 @@ public class DatabaseAccess {
         statement.setInt(1, amount);
         statement.setInt(2, orderid);
         statement.setInt(3, bookid);
+        conn.close();
         return statement.executeUpdate();
     }
 
@@ -88,6 +100,7 @@ public class DatabaseAccess {
             default:
                 statement = conn.prepareStatement("delete from user where false");
         }
+        conn.close();
         return statement.executeUpdate();
     }
 
@@ -96,6 +109,7 @@ public class DatabaseAccess {
         PreparedStatement statement = conn.prepareStatement("insert into book (name, price) values (?, ?)");
         statement.setString(1, name);
         statement.setDouble(2, price);
+        conn.close();
         return statement.executeUpdate();
     }
 
@@ -104,6 +118,7 @@ public class DatabaseAccess {
         PreparedStatement statement = conn.prepareStatement("insert into user (name, email) values(?, ?)");
         statement.setString(1, name);
         statement.setString(2, email);
+        conn.close();
         return statement.executeUpdate();
     }
 
@@ -111,6 +126,7 @@ public class DatabaseAccess {
         Connection conn = ds.getConnection();
         PreparedStatement statement = conn.prepareStatement("insert into orders (userid) values (?)");
         statement.setInt(1, userid);
+        conn.close();
         return statement.executeUpdate();
     }
 

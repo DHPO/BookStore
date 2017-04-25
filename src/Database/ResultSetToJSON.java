@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-public class ResultSetToJSON {
-    public static String convert(ResultSet set) throws SQLException, JSONException {
+class ResultSetToJSON {
+    static String convert(ResultSet set) throws SQLException, JSONException {
         JSONArray array = new JSONArray();
 
         ResultSetMetaData metaData = set.getMetaData();
