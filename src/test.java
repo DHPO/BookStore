@@ -1,19 +1,24 @@
-import Database.DatabaseAccess;
+import Database.MySession;
+import entities.BookEntity;
+import entities.UserEntity;
+import org.hibernate.Session;
 import org.json.JSONException;
-import java.sql.*;
+
+import java.sql.SQLException;
 
 public class test {
     public static void main(String argv[]) throws ClassNotFoundException, SQLException, JSONException {
-        Class.forName("com.mysql.jdbc.Driver");
-        String url = "jdbc:mysql://localhost:3306/bookstore";
-        String user = "root";
-        String pwd = "20030344";
-        Connection con = DriverManager.getConnection(url, user, pwd);
-
-        PreparedStatement statement = con.prepareStatement("delete from book where id = ?");
-        statement.setInt(1,7);
-        int result = statement.executeUpdate();
-
-        System.out.println(result);
+        Session session = MySession.getSession();
+        try{
+            session.beginTransaction();
+            Short bookid = 2;
+            BookEntity book = session.load(BookEntity.class, bookid);
+            Short userid = 3;
+            UserEntity user = session.load(UserEntity.class, userid);
+            System.out.println(book.getName() + user.getName());
+            session.getTransaction().commit();
+        }finally {
+            session.close();
+        }
     }
 }

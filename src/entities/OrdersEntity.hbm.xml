@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="entities.OrdersEntity" table="orders" schema="bookstore">
+        <id name="orderid" column="orderid">
+            <generator class="native"/>
+        </id>
+        <many-to-one name="userByUserid" class="entities.UserEntity">
+            <column name="userid"/>
+        </many-to-one>
+        <set name="orderItemsByOrderid" inverse="true" cascade="save-update">
+            <key>
+                <column name="orderid"/>
+            </key>
+            <one-to-many not-found="ignore" class="entities.OrderItemEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>

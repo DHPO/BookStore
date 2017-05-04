@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/bookstore</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">20030344</property>
+
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+        <!--Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+        <mapping class="entities.BookEntity"/>
+        <mapping resource="entities/BookEntity.hbm.xml"/>
+        <mapping class="entities.OrderItemEntity"/>
+        <mapping resource="entities/OrderItemEntity.hbm.xml"/>
+        <mapping class="entities.OrdersEntity"/>
+        <mapping resource="entities/OrdersEntity.hbm.xml"/>
+        <mapping class="entities.UserEntity"/>
+        <mapping resource="entities/UserEntity.hbm.xml"/>
+
+
+    </session-factory>
+</hibernate-configuration>
