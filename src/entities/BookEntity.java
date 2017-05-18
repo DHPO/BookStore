@@ -17,7 +17,7 @@ public class BookEntity {
     private Collection<OrderItemEntity> orderItemsById;
 
     public BookEntity(){
-        orderItemsById = new HashSet<>();
+        this.orderItemsById = new HashSet<>();
     }
 
     @Id

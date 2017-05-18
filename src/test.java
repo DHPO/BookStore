@@ -2,12 +2,9 @@ import Database.MySession;
 import entities.BookEntity;
 import entities.UserEntity;
 import org.hibernate.Session;
-import org.json.JSONException;
-
-import java.sql.SQLException;
 
 public class test {
-    public static void main(String argv[]) throws ClassNotFoundException, SQLException, JSONException {
+    public static void main(String argv[]){
         Session session = MySession.getSession();
         try{
             session.beginTransaction();
