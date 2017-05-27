@@ -55,24 +55,31 @@ app.controller("bookController",function($scope, $http, $timeout){
         $scope.price = "";
     }
     $scope.submitBtn = function(){
-        if($scope.create){var url = "/insert";}
-        else if($scope.edit){var url = "/update";}
-        var postBody = {
-            "id": $scope.bookID,
-            "name": $scope.bookName,
-            "price": $scope.price,
-            "table":"book"
-        };
-       post(url, postBody);
+        if($scope.create){
+            //var url = "/insertBook";
+            var postBody = {
+                "name": $scope.bookName,
+                "price": $scope.price
+            };
+            post("/insertBook", postBody);
+        }
+        else if($scope.edit){
+            //var url = "/updateBook";
+            var postBody = {
+                "id": $scope.bookID,
+                "name": $scope.bookName,
+                "price": $scope.price
+            };
+            post("/updateBook", postBody);
+        }
     }
     $scope.deleteBtn = function(id){
         if(!confirm("确定删除?"))return;
         $scope.sure = "";
         var postBody = {
-            "id": id,
-            "table": "book"
+            "id": id
         };
-        post("/delete",postBody);
+        post("/deleteBook",postBody);
         
     }
 })

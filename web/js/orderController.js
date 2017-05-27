@@ -30,7 +30,7 @@ app.controller("orderController",function($scope, $http, $timeout){
         });
     }
     $scope.getOrders = function(){
-        $http.get("/getOrder").then(function(response){
+        $http.get("/getOrders").then(function(response){
             $scope.orders = response["data"];
         });
     }
@@ -57,24 +57,28 @@ app.controller("orderController",function($scope, $http, $timeout){
         $scope.userid = "";
     }
     $scope.submitBtn = function(){
-        if($scope.create){var url = "/insert";}
-        else if($scope.edit){var url = "/update";}
-        var postBody = {
-            "orderid": $scope.orderid,
-            "userid": $scope.userid,
-            "table":"orders"
-        };
+        if($scope.create){
+            var postBody = {
+                "userid": $scope.userid,
+            };
+            post("/insertOrder", postBody);
+        }
+        else if($scope.edit){
+            var postBody = {
+                "id": $scope.orderid,
+                "userid": $scope.userid,
+            };
+            post("/updateOrder", postBody);
+        }
         console.log(postBody);
-       post(url, postBody);
     }
     $scope.deleteBtn = function(orderid){
         if(!confirm("确定删除?"))return;
         $scope.sure = "";
         var postBody = {
-            "orderid": orderid,
-            "table": "orders"
+            "id": orderid
         };
-        post("/delete",postBody);
+        post("/deleteOrder",postBody);
         
     }
 })

@@ -1,7 +1,10 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Created by jimmy on 17-5-4.
@@ -12,10 +15,17 @@ public class OrdersEntity {
     private short orderid;
     private Collection<OrderItemEntity> orderItemsByOrderid;
     private UserEntity userByUserid;
+    private short userid;
 
     public OrdersEntity(){
         orderItemsByOrderid = new HashSet<>();
     }
+
+    public short getUserid(){
+        if(userByUserid != null)
+            setUserid(userByUserid.getId());
+        return this.userid;}
+    public void setUserid(short id){this.userid = id;}
 
     @Id
     @Column(name = "orderid")
@@ -44,6 +54,7 @@ public class OrdersEntity {
         return (int) orderid;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "ordersByOrderid")
     public Collection<OrderItemEntity> getOrderItemsByOrderid() {
         return orderItemsByOrderid;
@@ -53,6 +64,7 @@ public class OrdersEntity {
         this.orderItemsByOrderid = orderItemsByOrderid;
     }
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "userid", referencedColumnName = "id", nullable = false)
     public UserEntity getUserByUserid() {

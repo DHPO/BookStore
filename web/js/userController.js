@@ -25,7 +25,7 @@ app.controller("userController",function($scope, $http, $timeout){
         });
     }
     $scope.getUsers = function(){
-        $http.get("/getUser").then(function(response){
+        $http.get("/getUsers").then(function(response){
             $scope.users = response["data"];
         });
     }
@@ -52,24 +52,31 @@ app.controller("userController",function($scope, $http, $timeout){
         $scope.email = "";
     }
     $scope.submitBtn = function(){
-        if($scope.create){var url = "/insert";}
-        else if($scope.edit){var url = "/update";}
-        var postBody = {
-            "id": $scope.id,
-            "name": $scope.name,
-            "email": $scope.email,
-            "table":"user"
-        };
-       post(url, postBody);
+        if($scope.create){
+            var url = "/insert";
+            var postBody = {
+                "name": $scope.name,
+                "email": $scope.email,
+            };
+            post("/insertUser", postBody);
+        }
+        else if($scope.edit){
+            var url = "/update";
+            var postBody = {
+                "id": $scope.id,
+                "name": $scope.name,
+                "email": $scope.email,
+            };
+            post("/updateUser", postBody);
+        }
     }
     $scope.deleteBtn = function(id){
         if(!confirm("确定删除?"))return;
         $scope.sure = "";
         var postBody = {
-            "id": id,
-            "table": "user"
+            "id": id
         };
-        post("/delete",postBody);
+        post("/deleteUser",postBody);
         
     }
 })

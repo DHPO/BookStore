@@ -25,7 +25,7 @@ app.controller("orderItemController",function($scope, $http, $timeout){
         });
     }
     $scope.getOrderItem = function(){
-        $http.get("/getOrderItem").then(function(response){
+        $http.get("/getOrderItems").then(function(response){
             $scope.orderItems = response["data"];
         });
     }
@@ -52,26 +52,32 @@ app.controller("orderItemController",function($scope, $http, $timeout){
         $scope.amount = "";
     }
     $scope.submitBtn = function(){
-        if($scope.create){var url = "/insert";}
-        else if($scope.edit){var url = "/update";}
-        var postBody = {
-            "orderid": $scope.orderid,
-            "bookid": $scope.bookid,
-            "amount": $scope.amount,
-            "table":"orderItem"
-        };
-        console.log(postBody);
-        post(url, postBody);
+        if($scope.create){
+            var postBody = {
+                "orderid": $scope.orderid,
+                "bookid": $scope.bookid,
+                "amount": $scope.amount
+            };
+            post("/insertOrderItem", postBody);
+        }
+        else if($scope.edit){
+            var url = "/update";
+            var postBody = {
+                "orderid": $scope.orderid,
+                "bookid": $scope.bookid,
+                "amount": $scope.amount
+            };
+            post("/updateOrderItem", postBody);
+        }
     }
     $scope.deleteBtn = function(orderid, bookid){
         if(!confirm("确定删除?"))return;
         $scope.sure = "";
         var postBody = {
             "orderid": orderid,
-            "bookid": bookid,
-            "table": "orderItem"
+            "bookid": bookid
         };
-        post("/delete",postBody);
+        post("/deleteOrderItem",postBody);
 
     }
 })

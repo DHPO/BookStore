@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebServlet("/getBook")
+@WebServlet("/getBooks")
 public class ServletGetBook extends HttpServlet {
     @Resource(name = "jdbc/bookstore")
     private DataSource ds;

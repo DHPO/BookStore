@@ -1,5 +1,7 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,21 +11,19 @@ import java.io.Serializable;
 @Entity
 @Table(name = "orderItem", schema = "bookstore")
 public class OrderItemEntity implements Serializable {
-    //private short orderid;
+    private short orderid;
     private Integer amount;
-    //private short bookid;
+    private short bookid;
     private OrdersEntity ordersByOrderid;
     private BookEntity bookByBookid;
 
-    /*@Id
-    @Column(name = "orderid", nullable = false)
     public short getOrderid() {
+        if(ordersByOrderid != null)
+            orderid = ordersByOrderid.getOrderid();
         return orderid;
     }
 
-    public void setOrderid(short orderid) {
-        this.orderid = orderid;
-    }*/
+    public void setOrderid(short orderid) {this.orderid = orderid;}
 
     @Basic
     @Column(name = "amount")
@@ -35,15 +35,13 @@ public class OrderItemEntity implements Serializable {
         this.amount = amount;
     }
 
-    /*@Id
-    @Column(name = "bookid", nullable = false)
     public short getBookid() {
+        if(bookByBookid != null)
+            this.bookid = bookByBookid.getId();
         return bookid;
     }
 
-    public void setBookid(short bookid) {
-        this.bookid = bookid;
-    }*/
+    public void setBookid(short bookid) {this.bookid = bookid;}
 
     @Override
     public boolean equals(Object o) {
@@ -67,6 +65,7 @@ public class OrderItemEntity implements Serializable {
         return result;
     }
 
+    @JsonIgnore
     @Id
     @ManyToOne
     @JoinColumn(name = "orderid", referencedColumnName = "orderid", nullable = false)
@@ -78,6 +77,7 @@ public class OrderItemEntity implements Serializable {
         this.ordersByOrderid = ordersByOrderid;
     }
 
+    @JsonIgnore
     @Id
     @ManyToOne
     @JoinColumn(name = "bookid", referencedColumnName = "id", nullable = false)

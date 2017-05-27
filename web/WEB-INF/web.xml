@@ -4,6 +4,35 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+
+    <filter>
+        <filter-name>openSessionInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.hibernate5.support.OpenSessionInViewFilter</filter-class>
+        <init-param>
+            <param-name>flushMode</param-name>
+            <param-value>AUTO</param-value>
+        </init-param>
+        <init-param>
+            <param-name>singleSession</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+
+
+    <filter-mapping>
+        <filter-name>openSessionInViewFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:SprintMVC-servlet.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
     <!--configure the setting of spring mvc DispatcherServlet and configure the mapping-->
     <servlet>
         <servlet-name>SpringMVC</servlet-name>
@@ -18,7 +47,6 @@
         <servlet-name>SpringMVC</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
 
     <servlet-mapping>
         <servlet-name>default</servlet-name>

@@ -1,5 +1,7 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,7 +11,7 @@ import java.util.HashSet;
  */
 @Entity
 @Table(name = "book", schema = "bookstore")
-public class BookEntity {
+public class BookEntity{
     private short id;
     private String name;
     private Double price;
@@ -83,7 +85,7 @@ public class BookEntity {
         result = 31 * result + (img != null ? img.hashCode() : 0);
         return result;
     }
-
+    @JsonIgnore
     @OneToMany(mappedBy = "bookByBookid")
     public Collection<OrderItemEntity> getOrderItemsById() {
         return orderItemsById;

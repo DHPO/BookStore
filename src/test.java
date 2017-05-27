@@ -1,21 +1,16 @@
-import Database.MySession;
-import entities.BookEntity;
-import entities.UserEntity;
-import org.hibernate.Session;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 
+/**
+ * Created by jimmy on 17-5-27.
+ */
 public class test {
-    public static void main(String argv[]){
-        Session session = MySession.getSession();
-        try{
-            session.beginTransaction();
-            Short bookid = 2;
-            BookEntity book = session.load(BookEntity.class, bookid);
-            Short userid = 3;
-            UserEntity user = session.load(UserEntity.class, userid);
-            System.out.println(book.getName() + user.getName());
-            session.getTransaction().commit();
-        }finally {
-            session.close();
-        }
+    private static org.springframework.orm.hibernate4.LocalSessionFactoryBean session;
+
+    public void setSession(LocalSessionFactoryBean session){
+        this.session = session;
+    }
+
+    public static void main(String args[]){
+        System.out.println(session.getObject());
     }
 }
