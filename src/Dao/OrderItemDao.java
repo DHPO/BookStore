@@ -1,18 +1,13 @@
 package Dao;
 
-import Database.MySession;
-import entities.BookEntity;
 import entities.OrderItemEntity;
-import entities.OrdersEntity;
-import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by jimmy on 17-5-23.
  */
-public class OrderItemDao {
+/*public class OrderItemDao {
     public OrderItemEntity getOrderItemByIds(short orderid, short bookid){
         Session session = MySession.getSession();
         OrderItemEntity orderItem = null;
@@ -97,5 +92,12 @@ public class OrderItemDao {
         }
         return result;
     }
+}*/
+
+public interface OrderItemDao{
+    List<OrderItemEntity> getOrderItems();
+    int insertOrderItem(OrderItemEntity item);
+    int updateOrderItem(OrderItemEntity item);
+    int deleteOrderItem(short orderid, short bookid);
 }
 

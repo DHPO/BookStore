@@ -65,7 +65,7 @@ app.controller("orderController",function($scope, $http, $timeout){
         }
         else if($scope.edit){
             var postBody = {
-                "id": $scope.orderid,
+                "orderid": $scope.orderid,
                 "userid": $scope.userid,
             };
             post("/updateOrder", postBody);

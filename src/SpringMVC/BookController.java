@@ -1,40 +1,40 @@
 package SpringMVC;
 
-import Dao.BookDao;
 import entities.BookEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jimmy on 17-5-22.
  */
 @Controller
 public class BookController {
-    private BookDao bookDao = new Dao.BookDao();
+    private AppService.AppService appService;
 
-    public void setBookDao(BookDao bookDao){this.bookDao = bookDao;}
+    public void setAppService(AppService.AppService appService){this.appService = appService;}
 
     @RequestMapping(value = "/getBook")
-    public @ResponseBody ArrayList<BookEntity> getBooks(){
-        return bookDao.getBooks();
+    public @ResponseBody
+    List<BookEntity> getBooks(){
+        return appService.getBooks();
     }
 
     @RequestMapping(value = "/updateBook")
     public @ResponseBody int updateBook(BookEntity book){
-        return bookDao.updateBook(book);
+        return appService.updateBook(book);
     }
 
     @RequestMapping(value = "/insertBook")
     public @ResponseBody int insertBook(BookEntity book){
-        return bookDao.insertBook(book);
+        return appService.insertBook(book);
     }
 
     @RequestMapping(value = "/deleteBook")
     public @ResponseBody int deleteBook(short id){
-        return bookDao.deleteBook(id);
+        return appService.deleteBook(id);
     }
 }
 

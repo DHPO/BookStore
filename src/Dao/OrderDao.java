@@ -1,17 +1,13 @@
 package Dao;
 
-import Database.MySession;
 import entities.OrdersEntity;
-import entities.UserEntity;
-import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by jimmy on 17-5-23.
  */
-public class OrderDao {
+/*public class OrderDao {
     public ArrayList<OrdersEntity> getOrders(){
         Session session = MySession.getSession();
         List orderList;
@@ -78,5 +74,12 @@ public class OrderDao {
         }
         return result;
     }
+}*/
+
+public interface OrderDao{
+    List<OrdersEntity> getOrders();
+    int insertOrder(OrdersEntity order);
+    int updateOrder(OrdersEntity order);
+    int deleteOrder(short id);
 }
 

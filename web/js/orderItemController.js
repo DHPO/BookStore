@@ -61,7 +61,6 @@ app.controller("orderItemController",function($scope, $http, $timeout){
             post("/insertOrderItem", postBody);
         }
         else if($scope.edit){
-            var url = "/update";
             var postBody = {
                 "orderid": $scope.orderid,
                 "bookid": $scope.bookid,

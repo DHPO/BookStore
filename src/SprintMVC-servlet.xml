@@ -64,12 +64,51 @@
         </property>
     </bean>
 
-    <bean id="daoTest" class="SpringMVC.DaoTest">
+    <bean id="basicMovement" class="Dao.impl.BasicMovement">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="test" class="SpringMVC.Test">
-        <property name="daoTest" ref="daoTest"/>
+    <bean id="bookDaoImpl" class="Dao.impl.BookDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="basicMovement" ref="basicMovement"/>
+    </bean>
+
+    <bean id="userDaoImpl" class="Dao.impl.UserDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="basicMovement" ref="basicMovement"/>
+    </bean>
+
+    <bean id="orderDaoImpl" class="Dao.impl.OrderDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="basicMovement" ref="basicMovement"/>
+    </bean>
+
+    <bean id="orderItemDaoImpl" class="Dao.impl.OrderItemDaoImpl">
+        <property name="basicMovement" ref="basicMovement"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="appService" class="AppService.AppServiceImpl.AppServiceImpl">
+        <property name="bookDao" ref="bookDaoImpl"/>
+        <property name="userDao" ref="userDaoImpl"/>
+        <property name="orderDao" ref="orderDaoImpl"/>
+        <property name="orderItemDao" ref="orderItemDaoImpl"/>
+    </bean>
+
+    <bean id="bookController" class="SpringMVC.BookController">
+        <property name="appService" ref="appService"/>
+    </bean>
+
+    <bean id="userController" class="SpringMVC.UserController">
+        <property name="appService" ref="appService"/>
+    </bean>
+
+    <bean id="orderController" class="SpringMVC.OrderController">
+        <property name="appService" ref="appService"/>
+    </bean>
+
+    <bean id="orderItemController" class="SpringMVC.OrderItemController">
+        <property name="appService" ref="appService"/>
     </bean>
 
     <bean id="transactionManager"

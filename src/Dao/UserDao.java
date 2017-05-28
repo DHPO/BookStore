@@ -1,16 +1,13 @@
 package Dao;
 
-import Database.MySession;
 import entities.UserEntity;
-import org.hibernate.Session;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by jimmy on 17-5-23.
  */
-public class UserDao {
+/*public class UserDao {
     public ArrayList<UserEntity> getUsers(){
         Session session = MySession.getSession();
         List userList;
@@ -74,5 +71,13 @@ public class UserDao {
         }
         return result;
     }
+}
+*/
+
+public interface UserDao{
+    List<UserEntity> getUsers();
+    int insertUser(UserEntity u);
+    int updateUser(UserEntity u);
+    int deleteUser(short id);
 }
 
