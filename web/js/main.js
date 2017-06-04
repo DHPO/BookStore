@@ -1,6 +1,6 @@
-var app = angular.module("main",[]);
+var app = angular.module("main",["ui.bootstrap"]);
 
-app.controller("mainController",function($scope, $http){
+app.controller("mainController",function($scope, $http, $uibModal){
     $scope.test = "hello";
 
     $scope.mode = false;
@@ -21,5 +21,12 @@ app.controller("mainController",function($scope, $http){
     $scope.modeToUser = function(){$scope.manageMode = 1;};
     $scope.modeToOrder = function(){$scope.manageMode = 2;};
     $scope.modeToOrderItem = function(){$scope.manageMode = 3;}
+
+    $scope.uibModalTest = function(){
+        $uibModal.open({
+            template:"<div id='modal-header'><h3 id='modal-title'>Hello</h3></div>",
+            ariaLabelledBy:"head"
+        });
+    }
 });
 

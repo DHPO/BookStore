@@ -16,7 +16,7 @@ public class OrderItemController {
 
     public void setAppService(AppService.AppService appService){this.appService = appService;}
 
-    @RequestMapping(value = "/getOrderItems")
+    @RequestMapping(value = "/getOrderItem")
     public @ResponseBody
     List<OrderItemEntity> getOrderItems(){
         return appService.getOrderItems();

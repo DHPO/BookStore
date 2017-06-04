@@ -36,4 +36,9 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao{
     public int updateUser(UserEntity user){
         return basicMovement.update(user);
     }
+
+    public UserEntity getUserByName(String name){
+        List<UserEntity> list = (List<UserEntity>)getHibernateTemplate().find("from UserEntity where name = ?", name);
+        return list.size()==1?list.get(0):null;
+    }
 }

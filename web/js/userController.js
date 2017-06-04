@@ -32,12 +32,13 @@ app.controller("userController",function($scope, $http, $timeout){
     $scope.edit = false;
     $scope.create = false;
     $scope.responseMsg = "";
-    $scope.editBtn = function(id, name, email){
+    $scope.editBtn = function(id, name, email, password){
         $scope.edit = true;
         $scope.create = false;
         $scope.id = id;
         $scope.name = name;
         $scope.email = email;
+        $scope.password = password;
     }
     $scope.cancelBtn = function(){
         $scope.edit = false;
@@ -50,22 +51,23 @@ app.controller("userController",function($scope, $http, $timeout){
         $scope.id = "auto";
         $scope.name = "";
         $scope.email = "";
+        $scope.password = "";
     }
     $scope.submitBtn = function(){
         if($scope.create){
-            var url = "/insert";
             var postBody = {
                 "name": $scope.name,
                 "email": $scope.email,
+                "password": $scope.password
             };
             post("/insertUser", postBody);
         }
         else if($scope.edit){
-            var url = "/update";
             var postBody = {
                 "id": $scope.id,
                 "name": $scope.name,
                 "email": $scope.email,
+                "password": $scope.password
             };
             post("/updateUser", postBody);
         }

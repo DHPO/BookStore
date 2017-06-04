@@ -16,6 +16,7 @@ public class OrderItemEntity implements Serializable {
     private short bookid;
     private OrdersEntity ordersByOrderid;
     private BookEntity bookByBookid;
+    private double price;
 
     public short getOrderid() {
         if(ordersByOrderid != null)
@@ -33,6 +34,16 @@ public class OrderItemEntity implements Serializable {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    @Basic
+    @Column(name = "price")
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public short getBookid() {

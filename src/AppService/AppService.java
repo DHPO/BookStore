@@ -30,4 +30,6 @@ public interface AppService {
     int deleteUser(short id);
     int deleteOrder(short id);
     int deleteOrderItem(short orderid, short bookid);
+
+    UserEntity login(String username, String password);
 }

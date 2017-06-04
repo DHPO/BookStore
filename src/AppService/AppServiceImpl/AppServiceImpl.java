@@ -46,4 +46,12 @@ public class AppServiceImpl implements AppService {
     public int deleteOrder(short id){return orderDao.deleteOrder(id);}
     public int deleteOrderItem(short orderid, short bookid){return orderItemDao.deleteOrderItem(orderid, bookid);}
 
+    public UserEntity login(String username, String password){
+        UserEntity user = userDao.getUserByName(username);
+        if(user == null || !user.getPassword().equals(password))
+            return null;
+        else
+            return user;
+    }
+
 }

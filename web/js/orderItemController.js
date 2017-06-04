@@ -19,6 +19,7 @@ app.controller("orderItemController",function($scope, $http, $timeout){
                 $scope.getOrderItem();
                 $scope.create = false;
                 $scope.edit = false;
+                $scope.fail = false;
             }
             else{$scope.responseMsg = "failed";$scope.fail = true;}
             $timeout(responseMsgReset,2000);
@@ -32,12 +33,13 @@ app.controller("orderItemController",function($scope, $http, $timeout){
     $scope.edit = false;
     $scope.create = false;
     $scope.responseMsg = "";
-    $scope.editBtn = function(orderid, bookid,amount){
+    $scope.editBtn = function(orderid, bookid, amount, price){
         $scope.edit = true;
         $scope.create = false;
         $scope.orderid = orderid;
         $scope.bookid = bookid;
         $scope.amount = amount;
+        $scope.price = price;
     }
     $scope.cancelBtn = function(){
         $scope.edit = false;
@@ -50,13 +52,15 @@ app.controller("orderItemController",function($scope, $http, $timeout){
         $scope.orderid = "";
         $scope.bookid = "";
         $scope.amount = "";
+        $scope.price = "";
     }
     $scope.submitBtn = function(){
         if($scope.create){
             var postBody = {
                 "orderid": $scope.orderid,
                 "bookid": $scope.bookid,
-                "amount": $scope.amount
+                "amount": $scope.amount,
+                "price": $scope.price
             };
             post("/insertOrderItem", postBody);
         }
@@ -64,7 +68,8 @@ app.controller("orderItemController",function($scope, $http, $timeout){
             var postBody = {
                 "orderid": $scope.orderid,
                 "bookid": $scope.bookid,
-                "amount": $scope.amount
+                "amount": $scope.amount,
+                "price": $scope.price
             };
             post("/updateOrderItem", postBody);
         }

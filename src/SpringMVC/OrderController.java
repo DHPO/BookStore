@@ -16,7 +16,7 @@ public class OrderController {
 
     public void setAppService(AppService.AppService appService){this.appService = appService;}
 
-    @RequestMapping(value = "/getOrders")
+    @RequestMapping(value = "/getOrder")
     public @ResponseBody
     List<OrdersEntity> getOrders(){
         return appService.getOrders();

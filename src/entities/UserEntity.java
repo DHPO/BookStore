@@ -15,6 +15,8 @@ public class UserEntity {
     private short id;
     private String name;
     private String email;
+    private String password;
+    private int role;
     private Collection<OrdersEntity> ordersById;
 
     public UserEntity(){
@@ -50,6 +52,16 @@ public class UserEntity {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Basic
+    @Column(name = "password")
+    public String getPassword(){return password;}
+    public void setPassword(String password){this.password = password;}
+
+    @Basic
+    @Column(name = "role")
+    public int getRole(){return role;}
+    public void setRole(int role){this.role = role;}
 
     @Override
     public boolean equals(Object o) {
