@@ -36,4 +36,8 @@ public class BookDaoImpl  extends HibernateDaoSupport implements BookDao{
     public int updateBook(BookEntity book){
         return basicMovement.update(book);
     }
+
+    public List<BookEntity> findBooksByName(String name){
+        return (List<BookEntity>)getHibernateTemplate().find("from BookEntity as b where b.name like ?", "%"+name+"%");
+    }
 }

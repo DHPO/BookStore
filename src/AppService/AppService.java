@@ -32,4 +32,5 @@ public interface AppService {
     int deleteOrderItem(short orderid, short bookid);
 
     UserEntity login(String username, String password);
+    List<BookEntity> findBooksByName(String name);
 }

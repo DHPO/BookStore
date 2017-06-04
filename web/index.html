@@ -1,56 +1,16 @@
-<!doctype html>
 <html>
     <head>
-        <script src="/js/angular.min.js"></script>
-        <script src="/js/main.js"></script>
-        <script src="/js/bookController.js"></script>
-        <script src="/js/orderController.js"></script>
-        <script src="/js/orderItemController.js"></script>
-        <script src="/js/userController.js"></script>
-        <script src="/js/directive.js"></script>
-        <script src="/bootstrap.min.js"></script>
-        <script src="/jquery-3.1.1.min.js"></script>
-        <script src="/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
-        <link href="/css/main.css" rel="stylesheet" type="text/css">
-        <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <title>Book Store</title>
-        <meta charset="UTF-8">
+        <title>test</title>
+        <script src="./jquery-3.1.1.min.js"></script>    
+        <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+        <!--<link href="/vue/bootstrap-vue.css" rel="stylesheet" type="text/css"></link>-->
+        <meta charset="UTF-8"/>         
     </head>
-    <body ng-app="main" ng-controller="mainController">
-
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand"><span class="glyphicon glyphicon-book"></span> 在线书店</a>
-            </div>
-            <div>
-                <ul class="nav navbar-nav">
-                    <li ng-class="{active:!mode}"><a href="" ng-click="switchBookstore()">首页</a></li>
-                    <li ng-class="{active:mode}"><a href="" ng-click="switchManage()">管理</a></li>
-                </ul>
-            </div>
-            <ul class="nav navbar-nav navbar-right"> 
-                <li><a href="#" ng-click="uibModalTest()"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li> 
-            </ul> 
-            <form class="nav navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">提交</button>
-            </form>
-            </div>
-        </nav>
-
-        <div id="head-container">
-            <h1>Book Store</h1>
-            <p>Welcome To Book Store</p>
-        </div>
-
-            <div id="body-container">
-                <div id="view" ng-hide="mode"><view-mode></view-mode></div>
-                <div id="manage" ng-hide="!mode"><manage-mode></manage-mode><div>
-            </div>
-
+    <body>
+        <div id="app">
+            <navbar></navbar>
+            <router-view></router-view>
+        </div>    
+        <script src="./bundle.js"></script>
     </body>
 </html>

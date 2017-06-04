@@ -9,4 +9,5 @@ public interface BookDao{
     int updateBook(BookEntity book);
     int deleteBook(short id);
     int insertBook(BookEntity book);
+    List<BookEntity> findBooksByName(String name);
 }

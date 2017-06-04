@@ -8,9 +8,13 @@
         <id name="orderid" column="orderid">
             <generator class="native"/>
         </id>
+
         <many-to-one name="userByUserid" class="entities.UserEntity">
             <column name="userid"/>
         </many-to-one>
+
+        <property name="status" column="status"/>
+
         <set name="orderItemsByOrderid" inverse="true" cascade="save-update">
             <key>
                 <column name="orderid"/>

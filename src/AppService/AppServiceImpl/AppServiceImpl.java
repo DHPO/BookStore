@@ -54,4 +54,8 @@ public class AppServiceImpl implements AppService {
             return user;
     }
 
+    public List<BookEntity> findBooksByName(String name){
+        return bookDao.findBooksByName(name);
+    }
+
 }

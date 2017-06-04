@@ -36,5 +36,10 @@ public class BookController {
     public @ResponseBody int deleteBook(short id){
         return appService.deleteBook(id);
     }
+
+    @RequestMapping(value = "/search")
+    public @ResponseBody List<BookEntity> searchBook(String name){
+        return appService.findBooksByName(name);
+    }
 }
 

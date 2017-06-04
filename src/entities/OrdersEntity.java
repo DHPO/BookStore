@@ -16,6 +16,7 @@ public class OrdersEntity {
     private Collection<OrderItemEntity> orderItemsByOrderid;
     private UserEntity userByUserid;
     private short userid;
+    private Integer status;
 
     public OrdersEntity(){
         orderItemsByOrderid = new HashSet<>();
@@ -36,6 +37,11 @@ public class OrdersEntity {
     public void setOrderid(short orderid) {
         this.orderid = orderid;
     }
+
+    @Basic
+    @Column(name = "status", nullable = false)
+    public Integer getStatus(){return status;}
+    public void setStatus(Integer status) { this.status = status;}
 
     @Override
     public boolean equals(Object o) {
@@ -80,6 +86,7 @@ public class OrdersEntity {
         item.setBookByBookid(book);
         item.setOrdersByOrderid(this);
         item.setAmount(amount);
+        item.setPrice(book.getPrice());
         this.orderItemsByOrderid.add(item);
     }
 }
