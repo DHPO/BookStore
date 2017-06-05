@@ -29,6 +29,7 @@ public class BookController {
 
     @RequestMapping(value = "/insertBook")
     public @ResponseBody int insertBook(BookEntity book){
+        System.out.println(book.getName());
         return appService.insertBook(book);
     }
 
