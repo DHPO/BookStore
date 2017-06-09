@@ -2,6 +2,7 @@ package Dao.impl;
 
 import Dao.BookDao;
 import entities.BookEntity;
+import entities.BookSimple;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public class BookDaoImpl  extends HibernateDaoSupport implements BookDao{
     private BasicMovement basicMovement;
 
     public void setBasicMovement(BasicMovement b){basicMovement = b;}
+
+    public List<BookSimple> getSimpleBooks(){return (List<BookSimple>)getHibernateTemplate().find("from BookSimple ");}
 
     public List<BookEntity> getBooks(){
         return (List<BookEntity>) getHibernateTemplate().find("from BookEntity ");
@@ -37,7 +40,11 @@ public class BookDaoImpl  extends HibernateDaoSupport implements BookDao{
         return basicMovement.update(book);
     }
 
-    public List<BookEntity> findBooksByName(String name){
-        return (List<BookEntity>)getHibernateTemplate().find("from BookEntity as b where b.name like ?", "%"+name+"%");
+    public List<BookSimple> findBooksByName(String name){
+        return (List<BookSimple>)getHibernateTemplate().find("from BookSimple as b where b.name like ?", "%"+name+"%");
+    }
+
+    public BookEntity getBookById(short id){
+        return getHibernateTemplate().load(BookEntity.class, id);
     }
 }

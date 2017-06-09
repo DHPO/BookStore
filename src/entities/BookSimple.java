@@ -1,29 +1,17 @@
 package entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
 
 /**
- * Created by jimmy on 17-5-4.
+ * Created by jimmy on 17-6-9.
  */
 @Entity
 @Table(name = "book", schema = "bookstore")
-public class BookEntity{
+public class BookSimple {
     private short id;
     private String name;
     private Double price;
     private String img;
-    private String author;
-    private String publisher;
-    private Double comment;
-    private Collection<OrderItemEntity> orderItemsById;
-
-    public BookEntity(){
-        this.orderItemsById = new HashSet<>();
-    }
 
     @Id
     @Column(name = "id")
@@ -65,27 +53,12 @@ public class BookEntity{
         this.img = img;
     }
 
-    @Basic
-    @Column(name = "author")
-    public String getAuthor(){return author;}
-    public void setAuthor(String author){this.author = author;}
-
-    @Basic
-    @Column(name = "publisher")
-    public String getPublisher(){return publisher;}
-    public void setPublisher(String publisher){this.publisher = publisher;}
-
-    @Basic
-    @Column(name = "comment")
-    public Double getComment(){return comment;}
-    public void setComment(Double comment){this.comment = comment;}
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        BookEntity that = (BookEntity) o;
+        BookSimple that = (BookSimple) o;
 
         if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
@@ -103,13 +76,5 @@ public class BookEntity{
         result = 31 * result + (img != null ? img.hashCode() : 0);
         return result;
     }
-    @JsonIgnore
-    @OneToMany(mappedBy = "bookByBookid")
-    public Collection<OrderItemEntity> getOrderItemsById() {
-        return orderItemsById;
-    }
 
-    public void setOrderItemsById(Collection<OrderItemEntity> orderItemsById) {
-        this.orderItemsById = orderItemsById;
-    }
 }

@@ -48,6 +48,7 @@
         <property name="mappingResources">
             <list>
                 <value>entities/BookEntity.hbm.xml</value>
+                <value>entities/BookSimple.hbm.xml</value>
                 <value>entities/UserEntity.hbm.xml</value>
                 <value>entities/OrdersEntity.hbm.xml</value>
                 <value>entities/OrderItemEntity.hbm.xml</value>
@@ -58,7 +59,7 @@
             <value>
                 hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
                 hibernate.hbm2ddl.auto=update
-                hibernate.show_sql=true
+                hibernate.show_sql=false
                 hibernate.format_sql=true
             </value>
         </property>
@@ -124,7 +125,10 @@
     </tx:advice>
 
     <aop:config>
-        <aop:pointcut id="beanPointcut" expression="execution(* SpringMVC.*.*(..))" />
+        <aop:pointcut id="beanPointcut" expression="execution(* Dao.*.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="beanPointcut" />
     </aop:config>
+
+    <import resource="classpath:mongodb-context.xml"/>
+
 </beans>

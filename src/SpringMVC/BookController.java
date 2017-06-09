@@ -1,6 +1,7 @@
 package SpringMVC;
 
 import entities.BookEntity;
+import entities.BookSimple;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,9 +17,9 @@ public class BookController {
 
     public void setAppService(AppService.AppService appService){this.appService = appService;}
 
-    @RequestMapping(value = "/getBook")
+    @RequestMapping(value = "/getBookSimple")
     public @ResponseBody
-    List<BookEntity> getBooks(){
+    List<BookSimple> getBooks(){
         return appService.getBooks();
     }
 
@@ -39,8 +40,16 @@ public class BookController {
     }
 
     @RequestMapping(value = "/search")
-    public @ResponseBody List<BookEntity> searchBook(String name){
+    public @ResponseBody List<BookSimple> searchBook(String name){
         return appService.findBooksByName(name);
+    }
+
+    @RequestMapping(value = "/getBook")
+    public @ResponseBody List<BookEntity> getBooksDetail(){return appService.getDetailBooks();}
+
+    @RequestMapping(value = "/getBookById")
+    public @ResponseBody BookEntity getBookById(short id){
+        return appService.getBookById(id);
     }
 }
 

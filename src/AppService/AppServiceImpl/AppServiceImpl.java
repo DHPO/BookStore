@@ -5,10 +5,7 @@ import Dao.BookDao;
 import Dao.OrderDao;
 import Dao.OrderItemDao;
 import Dao.UserDao;
-import entities.BookEntity;
-import entities.OrderItemEntity;
-import entities.OrdersEntity;
-import entities.UserEntity;
+import entities.*;
 
 import java.util.List;
 
@@ -26,7 +23,8 @@ public class AppServiceImpl implements AppService {
     public void setOrderDao(OrderDao orderDao){this.orderDao = orderDao;}
     public void setOrderItemDao(OrderItemDao orderItemDao){this.orderItemDao = orderItemDao;}
 
-    public List<BookEntity> getBooks(){return bookDao.getBooks();}
+    public List<BookSimple> getBooks(){return bookDao.getSimpleBooks();}
+    public List<BookEntity> getDetailBooks(){return bookDao.getBooks();}
     public List<UserEntity> getUsers(){return userDao.getUsers();}
     public List<OrdersEntity> getOrders(){return orderDao.getOrders();}
     public List<OrderItemEntity> getOrderItems(){return orderItemDao.getOrderItems();}
@@ -54,8 +52,9 @@ public class AppServiceImpl implements AppService {
             return user;
     }
 
-    public List<BookEntity> findBooksByName(String name){
+    public List<BookSimple> findBooksByName(String name){
         return bookDao.findBooksByName(name);
     }
 
+    public BookEntity getBookById(short id){return bookDao.getBookById(id);}
 }

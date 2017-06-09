@@ -23,6 +23,8 @@
         <mapping resource="entities/OrdersEntity.hbm.xml"/>
         <mapping class="entities.UserEntity"/>
         <mapping resource="entities/UserEntity.hbm.xml"/>
+        <mapping class="entities.BookSimple"/>
+        <mapping resource="entities/BookSimple.hbm.xml"/>
 
 
     </session-factory>

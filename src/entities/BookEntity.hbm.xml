@@ -4,11 +4,14 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="entities.BookEntity" table="book" schema="bookstore">
+    <class name="entities.BookEntity" table="book" schema="bookstore" lazy="false">
         <id name="id" column="id"/>
         <property name="name" column="name"/>
         <property name="price" column="price"/>
         <property name="img" column="img"/>
+        <property name="author" column="author"/>
+        <property name="publisher" column="publisher"/>
+        <property name="comment" column="comment"/>
         <set name="orderItemsById" inverse="true">
             <key>
                 <column name="bookid"/>
