@@ -55,6 +55,7 @@ public class UserController {
     public @ResponseBody int logout(HttpSession session){
         if(loginCheck(session)){
             session.setAttribute("user", null);
+            session.setAttribute("cart", null);
         }
         return 0;
     }
@@ -68,4 +69,5 @@ public class UserController {
         }
         return 0;
     }
+
 }

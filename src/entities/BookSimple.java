@@ -12,6 +12,17 @@ public class BookSimple {
     private String name;
     private Double price;
     private String img;
+    private int num = -1;
+
+    public void fromBookEntity(BookEntity book){
+        this.id = book.getId();
+        this.name = book.getName();
+        this.price = book.getPrice();
+        this.img = book.getImg();
+    }
+
+    public int getNum(){return num;}
+    public void setNum(int num){this.num = num;}
 
     @Id
     @Column(name = "id")

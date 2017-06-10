@@ -6,7 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jimmy on 17-5-22.
@@ -48,8 +51,17 @@ public class BookController {
     public @ResponseBody List<BookEntity> getBooksDetail(){return appService.getDetailBooks();}
 
     @RequestMapping(value = "/getBookById")
-    public @ResponseBody BookEntity getBookById(short id){
-        return appService.getBookById(id);
+    public @ResponseBody
+    Map<String, Object> getBookById(short id, HttpSession session){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("book", appService.getBookById(id));
+        map.put("num", appService.getBookNumInCart(id, session));
+        return map;
+    }
+
+    @RequestMapping(value = "/updateBookNumInCart")
+    public @ResponseBody int updateBookNumInCart(short id, Integer num, HttpSession session){
+        return appService.updateBookNumInCart(id, num, session);
     }
 }
 

@@ -2,6 +2,7 @@ package AppService;
 
 import entities.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -32,4 +33,13 @@ public interface AppService {
     UserEntity login(String username, String password);
     List<BookSimple> findBooksByName(String name);
     BookEntity getBookById(short id);
+
+    int getBookNumInCart(short bookid, HttpSession session);
+    int updateBookNumInCart(short bookid, int num, HttpSession session);
+    List<BookSimple> getBooksInCart(HttpSession session);
+
+    List<BookSimple> getOrderDetail(OrdersEntity order);
+    int submitCart(HttpSession session);
+
+    List<List<BookSimple>> getUserOrders(HttpSession session);
 }

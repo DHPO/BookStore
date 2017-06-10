@@ -20,7 +20,7 @@ public class OrderItemDaoImpl extends HibernateDaoSupport implements OrderItemDa
         return (List<OrderItemEntity>)getHibernateTemplate().find("from OrderItemEntity ");
     }
 
-    private OrderItemEntity loadOrderItem(short orderid, short bookid){
+    public OrderItemEntity loadOrderItem(short orderid, short bookid){
         OrdersEntity order = getHibernateTemplate().load(OrdersEntity.class, orderid);
         BookEntity book = getHibernateTemplate().load(BookEntity.class, bookid);
         List<OrderItemEntity> items = (List<OrderItemEntity>)getHibernateTemplate().find("from OrderItemEntity as item where item.ordersByOrderid = ? and item.bookByBookid = ?", order, book);
@@ -36,12 +36,16 @@ public class OrderItemDaoImpl extends HibernateDaoSupport implements OrderItemDa
     }
 
     public int insertOrderItem(OrderItemEntity item){
-        OrdersEntity order = getHibernateTemplate().get(OrdersEntity.class, item.getOrderid());
-        item.setOrdersByOrderid(order);
-        BookEntity book = getHibernateTemplate().get(BookEntity.class, item.getBookid());
-        item.setBookByBookid(book);
-        if(order == null || book == null)
-            return 0;
+        if(item.getOrdersByOrderid() == null){
+            OrdersEntity order = getHibernateTemplate().get(OrdersEntity.class, item.getOrderid());
+            item.setOrdersByOrderid(order);
+            if(order == null)return 0;
+        }
+        if(item.getBookByBookid() == null){
+            BookEntity book = getHibernateTemplate().get(BookEntity.class, item.getBookid());
+            item.setBookByBookid(book);
+            if(book == null) return 0;
+        }
         return basicMovement.insert(item);
     }
 
@@ -54,4 +58,5 @@ public class OrderItemDaoImpl extends HibernateDaoSupport implements OrderItemDa
             return 0;
         return basicMovement.update(item);
     }
+
 }

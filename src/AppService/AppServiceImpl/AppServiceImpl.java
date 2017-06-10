@@ -7,6 +7,9 @@ import Dao.OrderItemDao;
 import Dao.UserDao;
 import entities.*;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -57,4 +60,102 @@ public class AppServiceImpl implements AppService {
     }
 
     public BookEntity getBookById(short id){return bookDao.getBookById(id);}
+
+    public boolean loginCheck(HttpSession session){
+        return (session.getAttribute("user") != null);
+    }
+
+    OrdersEntity loadCart(HttpSession session){
+        if(session.getAttribute("cart") == null){
+            OrdersEntity cart = orderDao.getCart((UserEntity) session.getAttribute("user"));
+            if(cart == null){
+                cart = new OrdersEntity();
+                cart.setStatus(0);
+                cart.setUserByUserid((UserEntity) session.getAttribute("user"));
+                orderDao.insertOrder(cart);
+                cart = orderDao.getCart((UserEntity) session.getAttribute("user"));
+            }
+            session.setAttribute("cart", cart);
+        }
+        return (OrdersEntity) session.getAttribute("cart");
+    }
+
+    public int getBookNumInCart(short bookid, HttpSession session){
+        if(!loginCheck(session))
+            return -1;
+        OrdersEntity cart = loadCart(session);
+        OrderItemEntity item = orderItemDao.loadOrderItem(cart.getOrderid(), bookid);
+        return item==null?0:item.getAmount();
+    }
+
+    public int updateBookNumInCart(short bookid, int num, HttpSession session){
+        if(!loginCheck(session))
+            return -1;
+        if(num < 0)
+            return -2;
+        OrdersEntity cart = loadCart(session);
+        OrderItemEntity item = orderItemDao.loadOrderItem(cart.getOrderid(), bookid);
+        if(item == null){
+            item = new OrderItemEntity();
+            item.setOrdersByOrderid(cart);
+            item.setBookid(bookid);
+            item.setAmount(num);
+            return orderItemDao.insertOrderItem(item);
+        }
+        if(num == 0) {
+            return orderItemDao.deleteOrderItem(item.getOrderid(), item.getBookid());
+        }
+        item.setAmount(num);
+        return orderItemDao.updateOrderItem(item);
+    }
+
+    public List<BookSimple> getOrderDetail(OrdersEntity order){
+        Collection<OrderItemEntity> items =  order.getOrderItemsByOrderid();
+        List<BookSimple> result = new ArrayList<BookSimple>();
+        for(OrderItemEntity item : items){
+            BookSimple book = new BookSimple();
+            book.fromBookEntity(item.getBookByBookid());
+            book.setNum(item.getAmount());
+            result.add(book);
+        }
+        return result;
+    }
+
+    public List<BookSimple> getBooksInCart(HttpSession session){
+        if(!loginCheck(session))
+            return new ArrayList<>();
+        OrdersEntity cart = loadCart(session);
+        orderDao.refresh(cart);
+        return getOrderDetail(cart);
+    }
+
+    public int submitCart(HttpSession session){
+        if(!loginCheck(session))
+            return -1;
+        OrdersEntity cart = loadCart(session);
+        orderDao.refresh(cart);
+        if(cart.getOrderItemsByOrderid().isEmpty())
+            return -2;
+        for(OrderItemEntity item: cart.getOrderItemsByOrderid()){
+            item.setPrice(item.getBookByBookid().getPrice());
+            orderItemDao.updateOrderItem(item);
+        }
+        cart.setStatus(1);
+        session.setAttribute("cart", null);
+        orderDao.updateOrder(cart);
+        return 1;
+    }
+
+    public List<List<BookSimple>> getUserOrders(HttpSession session){
+        if(!loginCheck(session))
+            return new ArrayList<>();
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        List<OrdersEntity> orders = orderDao.getOrdersByUser(user);
+        ArrayList<List<BookSimple>> result = new ArrayList<>();
+        for(OrdersEntity order : orders){
+            orderDao.refresh(order);
+            result.add(getOrderDetail(order));
+        }
+        return result;
+    }
 }

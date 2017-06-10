@@ -12,5 +12,6 @@ public interface OrderItemDao{
     int insertOrderItem(OrderItemEntity item);
     int updateOrderItem(OrderItemEntity item);
     int deleteOrderItem(short orderid, short bookid);
+    OrderItemEntity loadOrderItem(short orderid, short bookid);
 }
 

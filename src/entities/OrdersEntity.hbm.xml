@@ -15,7 +15,7 @@
 
         <property name="status" column="status"/>
 
-        <set name="orderItemsByOrderid" inverse="true" cascade="save-update">
+        <set name="orderItemsByOrderid" inverse="true" cascade="save-update" lazy="false">
             <key>
                 <column name="orderid"/>
             </key>
