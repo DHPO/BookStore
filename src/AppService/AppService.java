@@ -11,24 +11,24 @@ import java.util.List;
 public interface AppService {
     List<BookSimple> getBooks();
     List<BookEntity> getDetailBooks();
-    List<UserEntity> getUsers();
-    List<OrdersEntity> getOrders();
-    List<OrderItemEntity> getOrderItems();
+    List<UserEntity> getUsers(HttpSession session);
+    List<OrdersEntity> getOrders(HttpSession session);
+    List<OrderItemEntity> getOrderItems(HttpSession session);
 
-    int insertBook(BookEntity book);
-    int insertUser(UserEntity user);
-    int insertOrder(OrdersEntity order);
-    int insertOrderItem(OrderItemEntity item);
+    int insertBook(BookEntity book, HttpSession session);
+    int insertUser(UserEntity user, HttpSession session);
+    int insertOrder(OrdersEntity order, HttpSession session);
+    int insertOrderItem(OrderItemEntity item, HttpSession session);
 
-    int updateBook(BookEntity book);
-    int updateUser(UserEntity user);
-    int updateOrder(OrdersEntity order);
-    int updateOrderItem(OrderItemEntity item);
+    int updateBook(BookEntity book, HttpSession session);
+    int updateUser(UserEntity user, HttpSession session);
+    int updateOrder(OrdersEntity order, HttpSession session);
+    int updateOrderItem(OrderItemEntity item, HttpSession session);
 
-    int deleteBook(short id);
-    int deleteUser(short id);
-    int deleteOrder(short id);
-    int deleteOrderItem(short orderid, short bookid);
+    int deleteBook(short id, HttpSession session);
+    int deleteUser(short id, HttpSession session);
+    int deleteOrder(short id, HttpSession session);
+    int deleteOrderItem(short orderid, short bookid, HttpSession session);
 
     UserEntity login(String username, String password);
     List<BookSimple> findBooksByName(String name);

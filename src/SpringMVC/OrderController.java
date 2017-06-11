@@ -20,21 +20,21 @@ public class OrderController {
 
     @RequestMapping(value = "/getOrder")
     public @ResponseBody
-    List<OrdersEntity> getOrders(){
-        return appService.getOrders();
+    List<OrdersEntity> getOrders(HttpSession session){
+        return appService.getOrders(session);
     }
 
     @RequestMapping(value = "/updateOrder")
-    public @ResponseBody int updateOrder(OrdersEntity order){
-        return appService.updateOrder(order);
+    public @ResponseBody int updateOrder(OrdersEntity order, HttpSession session){
+        return appService.updateOrder(order, session);
     }
 
     @RequestMapping(value = "/insertOrder")
-    public @ResponseBody int insertOrder(OrdersEntity order){ return appService.insertOrder(order);}
+    public @ResponseBody int insertOrder(OrdersEntity order, HttpSession session){ return appService.insertOrder(order, session);}
 
     @RequestMapping(value = "/deleteOrder")
-    public @ResponseBody int deleteOrder(short orderid){
-        return appService.deleteOrder(orderid);
+    public @ResponseBody int deleteOrder(short orderid, HttpSession session){
+        return appService.deleteOrder(orderid, session);
     }
 
     @RequestMapping(value = "/getCart")

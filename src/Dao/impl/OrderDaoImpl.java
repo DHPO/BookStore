@@ -64,6 +64,6 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao{
     public List<OrdersEntity> getOrdersByUser(UserEntity user){
         HibernateTemplate template = getHibernateTemplate();
         template.setMaxResults(5);
-        return (List<OrdersEntity>) template.find("from OrdersEntity where userByUserid = ? order by orderid desc ", user);
+        return (List<OrdersEntity>) template.find("from OrdersEntity where userByUserid = ? and status > 0 order by orderid desc ", user);
     }
 }

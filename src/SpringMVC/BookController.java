@@ -27,19 +27,18 @@ public class BookController {
     }
 
     @RequestMapping(value = "/updateBook")
-    public @ResponseBody int updateBook(BookEntity book){
-        return appService.updateBook(book);
+    public @ResponseBody int updateBook(BookEntity book, HttpSession session){
+        return appService.updateBook(book, session);
     }
 
     @RequestMapping(value = "/insertBook")
-    public @ResponseBody int insertBook(BookEntity book){
-        System.out.println(book.getName());
-        return appService.insertBook(book);
+    public @ResponseBody int insertBook(BookEntity book, HttpSession session){
+        return appService.insertBook(book, session);
     }
 
     @RequestMapping(value = "/deleteBook")
-    public @ResponseBody int deleteBook(short id){
-        return appService.deleteBook(id);
+    public @ResponseBody int deleteBook(short id, HttpSession session){
+        return appService.deleteBook(id, session);
     }
 
     @RequestMapping(value = "/search")

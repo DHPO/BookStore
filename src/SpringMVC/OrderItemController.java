@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -18,22 +19,22 @@ public class OrderItemController {
 
     @RequestMapping(value = "/getOrderItem")
     public @ResponseBody
-    List<OrderItemEntity> getOrderItems(){
-        return appService.getOrderItems();
+    List<OrderItemEntity> getOrderItems(HttpSession session){
+        return appService.getOrderItems(session);
     }
 
     @RequestMapping(value = "/updateOrderItem")
-    public @ResponseBody int updateOrderItem(OrderItemEntity orderItem){
-        return appService.updateOrderItem(orderItem);
+    public @ResponseBody int updateOrderItem(OrderItemEntity orderItem, HttpSession session){
+        return appService.updateOrderItem(orderItem, session);
     }
 
     @RequestMapping(value = "/insertOrderItem")
-    public @ResponseBody int insertOrderItem(OrderItemEntity orderItem){
-        return appService.insertOrderItem(orderItem);
+    public @ResponseBody int insertOrderItem(OrderItemEntity orderItem, HttpSession session){
+        return appService.insertOrderItem(orderItem, session);
     }
 
     @RequestMapping(value = "/deleteOrderItem")
-    public @ResponseBody int deleteBook(short orderid, short bookid){
-        return appService.deleteOrderItem(orderid, bookid);
+    public @ResponseBody int deleteBook(short orderid, short bookid, HttpSession session){
+        return appService.deleteOrderItem(orderid, bookid, session);
     }
 }

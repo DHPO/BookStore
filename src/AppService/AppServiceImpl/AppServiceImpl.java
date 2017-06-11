@@ -28,24 +28,84 @@ public class AppServiceImpl implements AppService {
 
     public List<BookSimple> getBooks(){return bookDao.getSimpleBooks();}
     public List<BookEntity> getDetailBooks(){return bookDao.getBooks();}
-    public List<UserEntity> getUsers(){return userDao.getUsers();}
-    public List<OrdersEntity> getOrders(){return orderDao.getOrders();}
-    public List<OrderItemEntity> getOrderItems(){return orderItemDao.getOrderItems();}
+    public List<UserEntity> getUsers(HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return new ArrayList<>();
+        return userDao.getUsers();
+    }
+    public List<OrdersEntity> getOrders(HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return new ArrayList<>();
+        return orderDao.getOrders();
+    }
+    public List<OrderItemEntity> getOrderItems(HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return new ArrayList<>();
+        return orderItemDao.getOrderItems();
+    }
 
-    public int insertBook(BookEntity book){return bookDao.insertBook(book);}
-    public int insertUser(UserEntity user){return userDao.insertUser(user);}
-    public int insertOrder(OrdersEntity order){return orderDao.insertOrder(order);}
-    public int insertOrderItem(OrderItemEntity item){return orderItemDao.insertOrderItem(item);}
+    public int insertBook(BookEntity book, HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return -1;
+        return bookDao.insertBook(book);
+    }
+    public int insertUser(UserEntity user, HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return -1;
+        return userDao.insertUser(user);
+    }
+    public int insertOrder(OrdersEntity order, HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return -1;
+        return orderDao.insertOrder(order);
+    }
+    public int insertOrderItem(OrderItemEntity item, HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return -1;
+        return orderItemDao.insertOrderItem(item);
+    }
 
-    public int updateBook(BookEntity book){return bookDao.updateBook(book);}
-    public int updateUser(UserEntity user){return userDao.updateUser(user);}
-    public int updateOrder(OrdersEntity order){return orderDao.updateOrder(order);}
-    public int updateOrderItem(OrderItemEntity item){return orderItemDao.updateOrderItem(item);}
+    public int updateBook(BookEntity book, HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return -1;
+        return bookDao.updateBook(book);
+    }
+    public int updateUser(UserEntity user, HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return -1;
+        return userDao.updateUser(user);
+    }
+    public int updateOrder(OrdersEntity order, HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return -1;
+        return orderDao.updateOrder(order);
+    }
+    public int updateOrderItem(OrderItemEntity item, HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return -1;
+        return orderItemDao.updateOrderItem(item);
+    }
 
-    public int deleteBook(short id){return bookDao.deleteBook(id);}
-    public int deleteUser(short id){return userDao.deleteUser(id);}
-    public int deleteOrder(short id){return orderDao.deleteOrder(id);}
-    public int deleteOrderItem(short orderid, short bookid){return orderItemDao.deleteOrderItem(orderid, bookid);}
+    public int deleteBook(short id, HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return -1;
+        return bookDao.deleteBook(id);
+    }
+    public int deleteUser(short id, HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return -1;
+        return userDao.deleteUser(id);
+    }
+    public int deleteOrder(short id, HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return -1;
+        return orderDao.deleteOrder(id);
+    }
+    public int deleteOrderItem(short orderid, short bookid, HttpSession session){
+        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+            return -1;
+        return orderItemDao.deleteOrderItem(orderid, bookid);
+    }
 
     public UserEntity login(String username, String password){
         UserEntity user = userDao.getUserByName(username);

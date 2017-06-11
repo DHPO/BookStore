@@ -19,23 +19,23 @@ public class UserController {
 
     @RequestMapping(value = "/getUser")
     public @ResponseBody
-    List<UserEntity> getUsers(){
-        return appService.getUsers();
+    List<UserEntity> getUsers(HttpSession session){
+        return appService.getUsers(session);
     }
 
     @RequestMapping(value = "/updateUser")
-    public @ResponseBody int updateUser(UserEntity user){
-        return appService.updateUser(user);
+    public @ResponseBody int updateUser(UserEntity user, HttpSession session){
+        return appService.updateUser(user, session);
     }
 
     @RequestMapping(value = "/insertUser")
-    public @ResponseBody int insertUser(UserEntity user){
-        return appService.insertUser(user);
+    public @ResponseBody int insertUser(UserEntity user, HttpSession session){
+        return appService.insertUser(user, session);
     }
 
     @RequestMapping(value = "/deleteUser")
-    public @ResponseBody int deleteUser(short id){
-        return appService.deleteUser(id);
+    public @ResponseBody int deleteUser(short id, HttpSession session){
+        return appService.deleteUser(id, session);
     }
 
     @RequestMapping(value = "/login")
@@ -63,7 +63,7 @@ public class UserController {
     @RequestMapping(value = "/register")
     public @ResponseBody int register(UserEntity user, HttpSession session){
         user.setRole(1);
-        if(appService.insertUser(user) == 1){
+        if(appService.insertUser(user, session) == 1){
             session.setAttribute("user", user);
             return user.getRole();
         }
