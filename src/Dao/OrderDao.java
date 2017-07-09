@@ -17,5 +17,8 @@ public interface OrderDao{
     OrdersEntity getCart(UserEntity user);
     void refresh(OrdersEntity order);
     List<OrdersEntity> getOrdersByUser(UserEntity user);
+    List salesByUser();
+    List salesByBook();
+    List salesByCategory();
 }
 

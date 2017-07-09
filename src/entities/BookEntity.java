@@ -19,6 +19,7 @@ public class BookEntity{
     private String author;
     private String publisher;
     private Double comment;
+    private String category;
     private Collection<OrderItemEntity> orderItemsById;
 
     public BookEntity(){
@@ -79,6 +80,11 @@ public class BookEntity{
     @Column(name = "comment")
     public Double getComment(){return comment;}
     public void setComment(Double comment){this.comment = comment;}
+
+    @Basic
+    @Column(name = "category")
+    public String getCategory(){return category;}
+    public void setCategory(String category){this.category = category;}
 
     @Override
     public boolean equals(Object o) {

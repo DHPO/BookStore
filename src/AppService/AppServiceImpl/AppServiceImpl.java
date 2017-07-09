@@ -71,7 +71,7 @@ public class AppServiceImpl implements AppService {
         return bookDao.updateBook(book);
     }
     public int updateUser(UserEntity user, HttpSession session){
-        if(!loginCheck(session) || ((UserEntity)session.getAttribute("user")).getRole() < 2)
+        if(!loginCheck(session) || (((UserEntity)session.getAttribute("user")).getRole() < 2))
             return -1;
         return userDao.updateUser(user);
     }
@@ -217,5 +217,27 @@ public class AppServiceImpl implements AppService {
             result.add(getOrderDetail(order));
         }
         return result;
+    }
+
+    public int updateProfile(UserEntity user, HttpSession session){
+        if(((UserEntity)session.getAttribute("user")).getId() == user.getId()){
+            userDao.updateUser(user);
+            session.setAttribute("user", user);
+            return 1;
+        }
+        else
+            return -1;
+    }
+
+    public List salesByUser(){
+        return orderDao.salesByUser();
+    }
+
+    public List salesByBook(){
+        return orderDao.salesByBook();
+    }
+
+    public List salesByCategory(){
+        return orderDao.salesByCategory();
     }
 }

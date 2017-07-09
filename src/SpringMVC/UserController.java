@@ -70,4 +70,13 @@ public class UserController {
         return 0;
     }
 
+    @RequestMapping(value = "/getUserBySession")
+    public @ResponseBody UserEntity getUserBySession(HttpSession session){
+        return (UserEntity) session.getAttribute("user");
+    }
+
+    @RequestMapping(value = "/updateProfile")
+    public @ResponseBody int updateProfile(UserEntity user, HttpSession session){
+        return appService.updateProfile(user, session);
+    }
 }

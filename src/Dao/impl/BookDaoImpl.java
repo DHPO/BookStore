@@ -18,6 +18,9 @@ public class BookDaoImpl  extends HibernateDaoSupport implements BookDao{
     public List<BookSimple> getSimpleBooks(){return (List<BookSimple>)getHibernateTemplate().find("from BookSimple ");}
 
     public List<BookEntity> getBooks(){
+        /*Session session = getSessionFactory().getCurrentSession();
+        Query query = session.createSQLQuery("{call getBooks()}");
+        return query.list();*/
         return (List<BookEntity>) getHibernateTemplate().find("from BookEntity ");
     }
 

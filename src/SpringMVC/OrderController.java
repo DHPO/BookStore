@@ -45,4 +45,13 @@ public class OrderController {
 
     @RequestMapping(value = "/getUserOrders")
     public @ResponseBody List<List<BookSimple>> getUserOrders(HttpSession session){return appService.getUserOrders(session);}
+
+    @RequestMapping(value = "/salesByUser")
+    public @ResponseBody List salesByUser(){return appService.salesByUser();}
+
+    @RequestMapping(value = "/salesByBook")
+    public @ResponseBody List salesByBook(){return appService.salesByBook();}
+
+    @RequestMapping(value = "/salesByCategory")
+    public @ResponseBody List salesByCategory(){return appService.salesByCategory();}
 }

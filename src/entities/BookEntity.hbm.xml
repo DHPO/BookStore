@@ -12,6 +12,7 @@
         <property name="author" column="author"/>
         <property name="publisher" column="publisher"/>
         <property name="comment" column="comment"/>
+        <property name="category" column="category"/>
         <set name="orderItemsById" inverse="true">
             <key>
                 <column name="bookid"/>

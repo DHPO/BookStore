@@ -3,6 +3,8 @@ package Dao.impl;
 import Dao.OrderDao;
 import entities.OrdersEntity;
 import entities.UserEntity;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
@@ -65,5 +67,23 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao{
         HibernateTemplate template = getHibernateTemplate();
         template.setMaxResults(5);
         return (List<OrdersEntity>) template.find("from OrdersEntity where userByUserid = ? and status > 0 order by orderid desc ", user);
+    }
+
+    public List salesByUser(){
+        Session session = getSessionFactory().getCurrentSession();
+        Query query = session.createSQLQuery("{call salesByUser()}");
+        return query.list();
+    }
+
+    public List salesByBook(){
+        Session session = getSessionFactory().getCurrentSession();
+        Query query = session.createSQLQuery("{call salesByBook()}");
+        return query.list();
+    }
+
+    public List salesByCategory(){
+        Session session = getSessionFactory().getCurrentSession();
+        Query query = session.createSQLQuery("{call salesByCategory()}");
+        return query.list();
     }
 }
