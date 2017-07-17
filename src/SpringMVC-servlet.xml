@@ -90,11 +90,21 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <bean id="fileDaoImpl" class="Dao.impl.FileDaoImpl"/>
+
     <bean id="appService" class="AppService.AppServiceImpl.AppServiceImpl">
         <property name="bookDao" ref="bookDaoImpl"/>
         <property name="userDao" ref="userDaoImpl"/>
         <property name="orderDao" ref="orderDaoImpl"/>
         <property name="orderItemDao" ref="orderItemDaoImpl"/>
+    </bean>
+
+    <bean id="salesService" class="AppService.AppServiceImpl.SalesServiceImpl">
+        <property name="orderDao" ref="orderDaoImpl"/>
+    </bean>
+
+    <bean id="fileService" class="AppService.AppServiceImpl.FileServiceImpl">
+
     </bean>
 
     <bean id="bookController" class="SpringMVC.BookController">
@@ -107,10 +117,15 @@
 
     <bean id="orderController" class="SpringMVC.OrderController">
         <property name="appService" ref="appService"/>
+        <property name="salesService" ref="salesService"/>
     </bean>
 
     <bean id="orderItemController" class="SpringMVC.OrderItemController">
         <property name="appService" ref="appService"/>
+    </bean>
+
+    <bean id="fileController" class="SpringMVC.FileController">
+
     </bean>
 
     <bean id="transactionManager"

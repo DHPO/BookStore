@@ -1,5 +1,6 @@
 package SpringMVC;
 
+import AppService.SalesService;
 import entities.BookSimple;
 import entities.OrdersEntity;
 import org.springframework.stereotype.Controller;
@@ -15,8 +16,10 @@ import java.util.List;
 @Controller
 public class OrderController {
     private AppService.AppService appService;
+    private SalesService salesService;
 
     public void setAppService(AppService.AppService appService){this.appService = appService;}
+    public void setSalesService(SalesService salesService){this.salesService = salesService;}
 
     @RequestMapping(value = "/getOrder")
     public @ResponseBody
@@ -47,11 +50,11 @@ public class OrderController {
     public @ResponseBody List<List<BookSimple>> getUserOrders(HttpSession session){return appService.getUserOrders(session);}
 
     @RequestMapping(value = "/salesByUser")
-    public @ResponseBody List salesByUser(){return appService.salesByUser();}
+    public @ResponseBody List salesByUser(){return salesService.salesByUser();}
 
     @RequestMapping(value = "/salesByBook")
-    public @ResponseBody List salesByBook(){return appService.salesByBook();}
+    public @ResponseBody List salesByBook(){return salesService.salesByBook();}
 
     @RequestMapping(value = "/salesByCategory")
-    public @ResponseBody List salesByCategory(){return appService.salesByCategory();}
+    public @ResponseBody List salesByCategory(){return salesService.salesByCategory();}
 }

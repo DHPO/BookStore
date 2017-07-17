@@ -17,6 +17,7 @@ public class UserEntity {
     private String email;
     private String password;
     private int role;
+    private String photoId;
     private Collection<OrdersEntity> ordersById;
 
     public UserEntity(){
@@ -63,6 +64,11 @@ public class UserEntity {
     public int getRole(){return role;}
     public void setRole(int role){this.role = role;}
 
+    @Basic
+    @Column(name = "photoId")
+    public String getPhotoId(){return photoId;}
+    public void setPhotoId(String photoId){this.photoId = photoId;}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,7 +85,7 @@ public class UserEntity {
 
     @Override
     public int hashCode() {
-        int result = (int) id;
+        int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;

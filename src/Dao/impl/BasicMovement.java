@@ -9,7 +9,7 @@ import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
  */
 public class BasicMovement extends HibernateDaoSupport {
     @Autowired
-    private MongoTemplate mongoTemplate;
+    MongoTemplate mongoTemplate;
 
     public int insert(Object o){
         try{

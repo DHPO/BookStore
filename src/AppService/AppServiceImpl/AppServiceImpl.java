@@ -228,16 +228,4 @@ public class AppServiceImpl implements AppService {
         else
             return -1;
     }
-
-    public List salesByUser(){
-        return orderDao.salesByUser();
-    }
-
-    public List salesByBook(){
-        return orderDao.salesByBook();
-    }
-
-    public List salesByCategory(){
-        return orderDao.salesByCategory();
-    }
 }

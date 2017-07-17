@@ -12,6 +12,7 @@
         <property name="email" column="email"/>
         <property name="password" column="password"/>
         <property name="role" column="role"/>
+        <property name="photoId" column="photoId"/>
         <set name="ordersById" inverse="true" cascade="save-update">
             <key>
                 <column name="userid"/>

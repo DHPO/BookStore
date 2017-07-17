@@ -31,7 +31,9 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao{
         }
     }
 
-    public int insertUser(UserEntity user){return basicMovement.insert(user);}
+    public int insertUser(UserEntity user){
+        return basicMovement.insert(user);
+    }
 
     public int updateUser(UserEntity user){
         return basicMovement.update(user);

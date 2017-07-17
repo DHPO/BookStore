@@ -44,7 +44,4 @@ public interface AppService {
     List<List<BookSimple>> getUserOrders(HttpSession session);
     int updateProfile(UserEntity user, HttpSession session);
 
-    List salesByUser();
-    List salesByBook();
-    List salesByCategory();
 }
